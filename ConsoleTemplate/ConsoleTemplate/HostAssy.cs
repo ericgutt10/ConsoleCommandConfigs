@@ -7,7 +7,7 @@ using Serilog.Settings.Configuration;
 using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 
-namespace $safeprojectname$;
+namespace Console;
 
 internal static class HostAssy
 {

@@ -2,7 +2,7 @@
 using Microsoft.Extensions.Configuration;
 using Serilog;
 
-namespace $safeprojectname$.Commands.Info;
+namespace Console.Commands.Info;
 
 internal class InfoCommand(
     ILogger logger,

@@ -3,7 +3,7 @@ using Microsoft.Extensions.Configuration;
 
 using Serilog;
 
-namespace $safeprojectname$.Commands;
+namespace Console.Commands;
 
 internal abstract class BaseCommand(
     ILogger? logger,

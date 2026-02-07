@@ -1,6 +1,6 @@
 ﻿using McMaster.Extensions.CommandLineUtils;
 
-namespace $safeprojectname$.Commands;
+namespace Console.Commands;
 
 [HelpOption("-?|-h|--help")]
 internal abstract class BaseCmd(IProgram program)

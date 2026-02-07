@@ -1,6 +1,6 @@
 ﻿using McMaster.Extensions.CommandLineUtils;
 
-namespace $safeprojectname$;
+namespace Console;
 
 public interface IInvoke
 {

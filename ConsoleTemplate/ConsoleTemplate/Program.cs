@@ -1,4 +1,4 @@
-﻿using $safeprojectname$.Commands.Info;
+﻿using Console.Commands.Info;
 using McMaster.Extensions.CommandLineUtils;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -6,7 +6,7 @@ using Microsoft.Extensions.Hosting;
 using Serilog;
 using System.Runtime;
 
-namespace $safeprojectname$;
+namespace Console;
 
 [Command(Name = "Template", Description = "Console Template"),
     Subcommand(typeof(InfoCmd))
@@ -30,8 +30,12 @@ internal class Program : IProgram
     public ILogger Logger { get; }
 
     private static async Task<int>? Main(string[] args)
-        => await HostBuilder!.RunCommandLineApplicationAsync<Program>(args, (app) =>
+        => await HostBuilder!.RunCommandLineApplicationAsync<Program>(args, async (app) =>
         {
+            AppDomain.CurrentDomain.ProcessExit += (s, e) =>
+            {
+                Log.CloseAndFlush();
+            };
 
             app.OnExecuteAsync(async (CancellationToken) =>
             {
@@ -39,6 +43,8 @@ internal class Program : IProgram
                 app.ShowRootCommandFullNameAndVersion();
                 return await Task.FromResult(0);
             });
+
+           await Task.CompletedTask;
         });
 
     public static IHostBuilder? HostBuilder { get; }

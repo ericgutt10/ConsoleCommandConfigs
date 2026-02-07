@@ -1,0 +1,18 @@
+{
+    "Logging": {
+        "LogLevel": {
+            "Default": "Information",
+            "Microsoft": "Warning"
+        }
+    },
+    "AppSettings": {
+        //Specify an existing folder or null for the default location
+        "LogsDirectory": ".\\logs"
+    }
+    "Commands": {
+        "Info": {
+            "InputDirectory": "D:\\Input",
+            "OutputDirectory": "D:\\Output"
+        }
+    }
+}

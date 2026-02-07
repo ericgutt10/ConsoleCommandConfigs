@@ -2,7 +2,7 @@
 using Microsoft.Extensions.Configuration;
 using System.Diagnostics;
 
-namespace $safeprojectname$.Commands;
+namespace Console.Commands;
 
 public static class CommandExtensions
 {
