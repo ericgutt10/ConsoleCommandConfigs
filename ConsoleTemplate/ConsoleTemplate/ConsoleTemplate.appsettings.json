@@ -7,10 +7,10 @@
     },
     "AppSettings": {
         //Specify an existing folder or null for the default location
-        "LogsDirectory": ".\\logs"
-    }
+        "LogsDirectory": null
+    },
     "Commands": {
-        "Info": {
+        "InfoCmd": {
             "InputDirectory": "D:\\Input",
             "OutputDirectory": "D:\\Output"
         }

@@ -1,4 +1,5 @@
-﻿using Console.Commands.Info;
+﻿using ConsoleTemplate.Commands.Info;
+using ConsoleTemplate.Lib;
 using McMaster.Extensions.CommandLineUtils;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -6,7 +7,7 @@ using Microsoft.Extensions.Hosting;
 using Serilog;
 using System.Runtime;
 
-namespace Console;
+namespace ConsoleTemplate;
 
 [Command(Name = "Template", Description = "Console Template"),
     Subcommand(typeof(InfoCmd))

@@ -7,7 +7,7 @@ using Serilog.Settings.Configuration;
 using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 
-namespace Console;
+namespace ConsoleTemplate.Lib;
 
 internal static class HostAssy
 {
@@ -38,11 +38,11 @@ internal static class HostAssy
 
     [RequiresUnreferencedCode("")]
     public static string LogPath<T>(IConfiguration configuration) where T : class => _logFullPath ??= (
-            (_logDir ??= new DirectoryInfo(configuration.GetValue<string>("AppSettings:LogsDirectory") ?? "")).Exists switch
+            _logDir ??= new DirectoryInfo( (configuration.GetValue<string?>("AppSettings:LogsDirectory") switch
             {
-                true => Path.Combine(_logDir.FullName, $"{HostName<T>()}{_logFileName}"),
+                string p when !string.IsNullOrWhiteSpace(p) => Path.Combine(p, $"{HostName<T>()}{_logFileName}"),
                 _ => Path.Combine(Path.GetTempPath(), $"{HostName<T>()}", $"{HostName<T>()}{_logFileName}")
-            });
+            }))).FullName;
 }
 
 internal static class CreateConfigurationFactory

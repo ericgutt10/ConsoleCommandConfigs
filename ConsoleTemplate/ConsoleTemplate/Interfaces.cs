@@ -1,6 +1,6 @@
 ﻿using McMaster.Extensions.CommandLineUtils;
 
-namespace Console;
+namespace ConsoleTemplate;
 
 public interface IInvoke
 {

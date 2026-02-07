@@ -1,6 +1,7 @@
-﻿using McMaster.Extensions.CommandLineUtils;
+﻿using ConsoleTemplate;
+using McMaster.Extensions.CommandLineUtils;
 
-namespace Console.Commands;
+namespace ConsoleTemplate.Commands;
 
 [HelpOption("-?|-h|--help")]
 internal abstract class BaseCmd(IProgram program)

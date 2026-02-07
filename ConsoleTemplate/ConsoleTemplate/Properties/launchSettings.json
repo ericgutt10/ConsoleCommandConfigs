@@ -2,6 +2,10 @@
   "profiles": {
     "ConsoleTemplate": {
       "commandName": "Project"
+    },
+    "InfoCmd": {
+      "commandName": "Project",
+      "commandLineArgs": "Info"
     }
   }
 }

@@ -1,9 +1,11 @@
-﻿using McMaster.Extensions.CommandLineUtils;
+﻿using ConsoleTemplate.Commands.Info;
+using ConsoleTemplate.Lib;
+using McMaster.Extensions.CommandLineUtils;
 using Microsoft.Extensions.Configuration;
 
 using Serilog;
 
-namespace Console.Commands;
+namespace ConsoleTemplate.Commands;
 
 internal abstract class BaseCommand(
     ILogger? logger,
@@ -11,7 +13,7 @@ internal abstract class BaseCommand(
 {
     public ILogger? Logger { get; } = logger;
     public IConfiguration Config { get; } = config;
-    public string? LogsDirectory { get; private set; }
+    public DirectoryInfo? LogsDirectory { get; private set; }
 
     protected virtual async Task<int> RunAsync()
     {
@@ -20,7 +22,8 @@ internal abstract class BaseCommand(
 
     protected virtual bool Validate(CommandLineApplication app)
     {
-        Logger?.Information($"Validate BaseCommand");
+        Logger?.Information($"Validate {nameof(BaseCommand)}");
+        List<(string prop, string? value)> changed = [];
 
         try
         {
@@ -30,13 +33,19 @@ internal abstract class BaseCommand(
                 .GetConfig(Config, "AppSettings:LogsDirectory")
                 .ValidateDirectory(createIfNotFound: false, ignoreExceptions: true);
 
-            Logger?.Information($"AppSettings:LogsDirectory - {LogsDirectory}");
+            changed.Add((nameof(LogsDirectory), $"{LogsDirectory}"));
+
+            var chgStr = changed.AggregateChangeList($"Validate {nameof(BaseCmd)}: ");
+
+            Logger?.Information("{@TableName} {sb}", Logger.TraceSrc(), chgStr);
 
             return true;
         }
         catch (Exception ex)
         {
-            Logger?.Error(ex.Message);
+            Logger?.Warning("{@TableName} {cmd} Validation Error: {ex}{inner}",
+                Logger.TraceSrc(), nameof(BaseCommand), ex.Message,
+                    ex.InnerException is null ? "" : ex.InnerException.Message);
         }
         return false;
     }
